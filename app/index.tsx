@@ -4,6 +4,7 @@ import { Searchbar } from 'react-native-paper';
 import RestaurantInfoCard from '@/components/RestaurantInfoCard';
 import styled from 'styled-components/native';
 import { restaurantData } from '@/utils/restaurants';
+import { useSearchQuery } from '@/hooks/useSearchQuery';
 
 const isAndroid = Platform.OS === 'android';
 
@@ -20,6 +21,7 @@ const SearchContainer = styled.View`
 const StyledSearchBar = styled(Searchbar)`
   background-color: white;
 `;
+1;
 
 const ListContainer = styled.ScrollView`
   background-color: #ffebee;
@@ -27,7 +29,7 @@ const ListContainer = styled.ScrollView`
 `;
 
 export default function Index() {
-  const [searchQuery, setSearchQuery] = React.useState('');
+  const { searchQuery, setSearchQuery } = useSearchQuery();
 
   return (
     <Container>
