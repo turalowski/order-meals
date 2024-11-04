@@ -1,8 +1,8 @@
 import React from 'react';
-import { Text, View, Platform, StatusBar, StyleSheet, ScrollView } from 'react-native';
+import { Platform, StatusBar } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import RestaurantInfoCard from '@/components/RestaurantInfoCard';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import styled from 'styled-components/native';
 
 const isAndroid = Platform.OS === 'android';
 
@@ -42,45 +42,45 @@ const restaurantData = [
   }
 ];
 
+const Container = styled.View`
+  flex: 1;
+  margin-top: ${isAndroid ? `${StatusBar.currentHeight}px` : '0'};
+`;
+
+const SearchContainer = styled.View`
+  background-color: #e8f5e9;
+  padding: 16px;
+`;
+
+const StyledSearchBar = styled(Searchbar)`
+  background-color: white;
+`;
+
+const ListContainer = styled.ScrollView`
+  background-color: #ffebee;
+  padding: 16px;
+`;
+
 export default function Index() {
   const [searchQuery, setSearchQuery] = React.useState('');
 
   return (
-    <View style={styles.container}>
-      <View style={[styles.searchContainer]}>
-        <Searchbar
+    <Container>
+      <SearchContainer>
+        <StyledSearchBar
           placeholder="Search"
           onChangeText={setSearchQuery}
           value={searchQuery}
-          style={styles.searchBar}
         />
-      </View>
-      <ScrollView style={styles.listContainer}>
+      </SearchContainer>
+      <ListContainer>
         {restaurantData.map((restaurant, index) => (
           <RestaurantInfoCard
             key={`${restaurant.name}-${index}`}
             {...restaurant}
           />
         ))}
-      </ScrollView>
-    </View>
+      </ListContainer>
+    </Container>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: isAndroid ? StatusBar.currentHeight : 0,
-  },
-  searchContainer: {
-    backgroundColor: '#e8f5e9',
-    padding: 16,
-  },
-  searchBar: {
-    backgroundColor: 'white',
-  },
-  listContainer: {
-    backgroundColor: '#ffebee',
-    padding: 16,
-  },
-});
