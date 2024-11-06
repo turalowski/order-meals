@@ -29,13 +29,14 @@ const Content = styled(Card.Content)`
 `;
 
 const Title = styled(Text)`
-  margin-bottom: ${props => props.theme.space[3]};
   font-family: ${props => props.theme.fonts.heading};
+  margin-bottom: ${props => props.theme.space[3]};
   font-weight: ${props => props.theme.fontWeights.bold};
 `;
 
 const InfoText = styled(Text)`
   color: ${props => props.theme.colors.text.primary};
+  font-family: ${props => props.theme.fonts.body};
   margin-bottom: ${props => props.theme.space[1]};
   font-size: ${props => props.theme.fontSizes.body};
   font-family: ${props => props.theme.fonts.body};
@@ -51,7 +52,6 @@ const TemporaryClosed = styled(Text)`
   font-weight: ${props => props.theme.fontWeights.bold};
   margin-top: ${props => props.theme.space[2]};
 `;
-
 
 export default function RestaurantInfo({
   name,

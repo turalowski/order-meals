@@ -6,6 +6,8 @@ import styled, { ThemeProvider } from 'styled-components/native';
 import { restaurantData } from '@/utils/restaurants';
 import { useSearchQuery } from '@/hooks/useSearchQuery';
 import { theme } from '@/theme';
+import { useFonts, Oswald_400Regular, Oswald_700Bold } from '@expo-google-fonts/oswald';
+import { Lato_400Regular, Lato_700Bold } from '@expo-google-fonts/lato';
 
 const isAndroid = Platform.OS === 'android';
 
@@ -31,7 +33,17 @@ const ListContainer = styled.ScrollView`
 
 export default function Index() {
   const { searchQuery, setSearchQuery } = useSearchQuery();
+  const [fontsLoaded] = useFonts({
+    Oswald_400Regular,
+    Oswald_700Bold,
+    Lato_400Regular,
+    Lato_700Bold
+  });
 
+  if(!fontsLoaded) {
+    return null;
+  }
+  
   return (
     <ThemeProvider theme={theme}>
       <Container>
