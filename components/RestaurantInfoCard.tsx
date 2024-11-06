@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { Card, Text } from 'react-native-paper';
+import { SvgXml } from 'react-native-svg';
+import star from '../assets/star';
+import open from '../assets/open';
 
 interface RestaurantInfoProps {
   name: string;
@@ -28,9 +31,22 @@ const Content = styled(Card.Content)`
   padding: ${props => props.theme.space[4]};
 `;
 
+const Row = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: ${props => props.theme.space[2]};
+  margin-bottom: ${props => props.theme.space[2]};
+`;
+
+const Stars = styled.View`
+  flex-direction: row;
+  margin-top: ${props => props.theme.space[1]};
+  margin-bottom: ${props => props.theme.space[1]};
+`;
+
 const Title = styled(Text)`
   font-family: ${props => props.theme.fonts.heading};
-  margin-bottom: ${props => props.theme.space[3]};
   font-weight: ${props => props.theme.fontWeights.bold};
 `;
 
@@ -62,11 +78,27 @@ export default function RestaurantInfo({
   rating,
   isClosedTemporary,
 }: RestaurantInfoProps) {
+  const ratingArray = Array.from(new Array(Math.ceil(rating)));
+
   return (
     <Container elevation={5}>
       <Cover source={{ uri: photos[0] }} />
       <Content>
         <Title variant="titleLarge">{name}</Title>
+        <Row>
+          <Stars>
+            {ratingArray.map(() => (
+              <SvgXml xml={star} width={20} height={20} />
+            ))}
+          </Stars>
+          {isClosedTemporary ? (
+            <TemporaryClosed variant="bodyMedium">
+              Temporarily Closed
+            </TemporaryClosed>
+          ) : (
+            <SvgXml xml={open} width={20} height={20} />
+          )}
+        </Row>
         <InfoText variant="bodyMedium">
           <Label>Rating:</Label> {rating}
         </InfoText>
@@ -76,11 +108,6 @@ export default function RestaurantInfo({
         <InfoText variant="bodyMedium">
           <Label>Address:</Label> {address}
         </InfoText>
-        {isClosedTemporary && (
-          <TemporaryClosed variant="bodyMedium">
-            Temporarily Closed
-          </TemporaryClosed>
-        )}
       </Content>
     </Container>
   );
