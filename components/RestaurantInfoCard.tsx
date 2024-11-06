@@ -13,42 +13,45 @@ interface RestaurantInfoProps {
 }
 
 const Container = styled(Card)`
-  margin-bottom: 16px;
-  background-color: #fff;
-  border-radius: 8px;
+  margin-bottom: ${props => props.theme.space[4]};
+  background-color: ${props => props.theme.colors.bg.primary};
+  border-radius: ${props => props.theme.space[2]};
 `;
 
 const Cover = styled(Card.Cover)`
-  height: 200px;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  height: ${props => props.theme.sizes[5]};
+  border-top-left-radius: ${props => props.theme.space[2]};
+  border-top-right-radius: ${props => props.theme.space[2]};
 `;
 
 const Content = styled(Card.Content)`
-  padding: 16px;
+  padding: ${props => props.theme.space[4]};
 `;
 
 const Title = styled(Text)`
-  margin-bottom: 16px;
-  font-weight: bold;
+  margin-bottom: ${props => props.theme.space[3]};
+  font-family: ${props => props.theme.fonts.heading};
+  font-weight: ${props => props.theme.fontWeights.bold};
 `;
 
 const InfoText = styled(Text)`
-  color: #444;
-  margin-bottom: 8px;
-  font-size: 16px;
+  color: ${props => props.theme.colors.text.primary};
+  margin-bottom: ${props => props.theme.space[1]};
+  font-size: ${props => props.theme.fontSizes.body};
+  font-family: ${props => props.theme.fonts.body};
 `;
 
 const Label = styled(Text)`
-  font-weight: bold;
-  color: #333;
+  font-weight: ${props => props.theme.fontWeights.bold};
+  color: ${props => props.theme.colors.ui.primary};
 `;
 
 const TemporaryClosed = styled(Text)`
-  color: #d32f2f;
-  font-weight: bold;
-  margin-top: 8px;
+  color: ${props => props.theme.colors.ui.error};
+  font-weight: ${props => props.theme.fontWeights.bold};
+  margin-top: ${props => props.theme.space[2]};
 `;
+
 
 export default function RestaurantInfo({
   name,
