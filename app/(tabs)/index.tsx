@@ -62,10 +62,10 @@ export default function Index() {
         </SearchContainer>
         <RestaurantList
           data={restaurantData}
-          renderItem={({ item, index }) => (
-            <RestaurantInfoCard key={`${item.name}-${index}`} {...item} />
+          renderItem={({ item }) => (
+            <RestaurantInfoCard {...item} />
           )}
-          keyExtractor={item => item.name}
+          keyExtractor={(item, index) => `${item.name}-${index}`}
         />
       </Container>
     </ThemeProvider>
