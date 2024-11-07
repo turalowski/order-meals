@@ -1,4 +1,14 @@
-export const restaurantData = [
+export interface Restaurant {
+  name: string;
+  icon: string;
+  photos: string[];
+  address: string;
+  isOpenNow: boolean;
+  rating: number;
+  isClosedTemporary: boolean;
+}
+
+export const restaurantData: Restaurant[] = [
     {
       name: "Sample Restaurant",
       icon: "",

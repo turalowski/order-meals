@@ -4,6 +4,7 @@ import { Card, Text } from 'react-native-paper';
 import { SvgXml } from 'react-native-svg';
 import star from '../assets/star';
 import open from '../assets/open';
+import { Spacing } from './Spacer';
 
 interface RestaurantInfoProps {
   name: string;
@@ -16,7 +17,6 @@ interface RestaurantInfoProps {
 }
 
 const Container = styled(Card)`
-  margin-bottom: ${props => props.theme.space[4]};
   background-color: ${props => props.theme.colors.bg.primary};
   border-radius: ${props => props.theme.space[2]};
 `;
@@ -35,14 +35,10 @@ const Row = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-top: ${props => props.theme.space[2]};
-  margin-bottom: ${props => props.theme.space[2]};
 `;
 
 const Stars = styled.View`
   flex-direction: row;
-  margin-top: ${props => props.theme.space[1]};
-  margin-bottom: ${props => props.theme.space[1]};
 `;
 
 const Title = styled(Text)`
@@ -53,7 +49,6 @@ const Title = styled(Text)`
 const InfoText = styled(Text)`
   color: ${props => props.theme.colors.text.primary};
   font-family: ${props => props.theme.fonts.body};
-  margin-bottom: ${props => props.theme.space[1]};
   font-size: ${props => props.theme.fontSizes.body};
   font-family: ${props => props.theme.fonts.body};
 `;
@@ -84,21 +79,25 @@ export default function RestaurantInfo({
     <Container elevation={5}>
       <Cover source={{ uri: photos[0] }} />
       <Content>
-        <Title variant="titleLarge">{name}</Title>
-        <Row>
-          <Stars>
-            {ratingArray.map(() => (
-              <SvgXml xml={star} width={20} height={20} />
-            ))}
-          </Stars>
-          {isClosedTemporary ? (
-            <TemporaryClosed variant="bodyMedium">
-              Temporarily Closed
-            </TemporaryClosed>
-          ) : (
-            <SvgXml xml={open} width={20} height={20} />
-          )}
-        </Row>
+        <Spacing position="bottom" size={'medium'}>
+          <Title variant="titleLarge">{name}</Title>
+        </Spacing>
+        <Spacing position="bottom" size={'medium'}>
+          <Row>
+            <Stars>
+              {ratingArray.map(() => (
+                <SvgXml xml={star} width={20} height={20} />
+              ))}
+            </Stars>
+            {isClosedTemporary ? (
+              <TemporaryClosed variant="bodyMedium">
+                Temporarily Closed
+              </TemporaryClosed>
+            ) : (
+              <SvgXml xml={open} width={20} height={20} />
+            )}
+          </Row>
+        </Spacing>
         <InfoText variant="bodyMedium">
           <Label>Rating:</Label> {rating}
         </InfoText>
