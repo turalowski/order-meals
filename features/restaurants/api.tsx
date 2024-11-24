@@ -23,7 +23,6 @@ interface TransformResults {
 }
 
 export const restaurantsTransform = ({ results = [] }: TransformResults) => {
-  console.log('data', results);
   const mappedResults = results.map((restaurant: Restaurant) => {
     restaurant.photos = restaurant.photos.map(p => {
       return mockImages[Math.ceil(Math.random() * mockImages.length - 1)];

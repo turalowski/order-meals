@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { Platform, StatusBar, FlatList } from 'react-native';
-import { Searchbar } from 'react-native-paper';
+import { ActivityIndicator, Searchbar } from 'react-native-paper';
 import RestaurantInfoCard from '@/components/RestaurantInfoCard';
 import styled from 'styled-components/native';
-import { Restaurant, restaurantData } from '@/utils/restaurants';
+import { Restaurant } from '@/utils/restaurants';
 import { useSearchQuery } from '@/hooks/useSearchQuery';
 import {
   useFonts,
@@ -12,6 +12,7 @@ import {
 } from '@expo-google-fonts/oswald';
 import { Lato_400Regular, Lato_700Bold } from '@expo-google-fonts/lato';
 import { RestaurantsContext } from './context';
+import { colors } from '@/theme/colors';
 
 const isAndroid = Platform.OS === 'android';
 
@@ -30,6 +31,17 @@ const StyledSearchBar = styled(Searchbar)`
   background-color: ${props => props.theme.colors.bg.primary};
 `;
 
+const LoadingContainer = styled.View`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1; 
+`;
+
+const StyledActivityIndicator = styled(ActivityIndicator)`
+margin-left: -25px;
+`;
+
 const RestaurantList = styled(FlatList<Restaurant>).attrs({
   contentContainerStyle: {
     padding: 16,
@@ -40,14 +52,14 @@ const RestaurantList = styled(FlatList<Restaurant>).attrs({
 export default function Restaurants() {
   const { searchQuery, setSearchQuery } = useSearchQuery();
   const restaurantContext = useContext(RestaurantsContext);
-  const {restaurants} = restaurantContext;
+  const { isLoading, restaurants } = restaurantContext;
   const [fontsLoaded] = useFonts({
     Oswald_400Regular,
     Oswald_700Bold,
     Lato_400Regular,
     Lato_700Bold,
   });
-console.log('restaurants', restaurants)
+
   if (!fontsLoaded) {
     return null;
   }
@@ -61,6 +73,11 @@ console.log('restaurants', restaurants)
           value={searchQuery}
         />
       </SearchContainer>
+      {isLoading && (
+        <LoadingContainer>
+          <StyledActivityIndicator size={50} animating={true} color={colors.ui.primary} />
+        </LoadingContainer>
+      )}
       <RestaurantList
         data={restaurants}
         renderItem={({ item }) => <RestaurantInfoCard {...item} />}

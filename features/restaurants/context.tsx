@@ -11,7 +11,7 @@ interface RestaurantsContextType {
 export const RestaurantsContext = createContext<RestaurantsContextType>({
   restaurants: [],
   isLoading: false,
-  error: null
+  error: null,
 });
 
 export const RestaurantsContextProvider = ({
@@ -26,12 +26,16 @@ export const RestaurantsContextProvider = ({
   const retrieveRestaurants = async () => {
     try {
       setIsLoading(true);
-      const result: any = await restaurantsRequest();
-      setRestaurants(restaurantsTransform(result));
-      setIsLoading(false);
+      setTimeout(async () => {
+        const result: any = await restaurantsRequest();
+        setRestaurants(restaurantsTransform(result));
+        setIsLoading(false);
+      }, 4000);
     } catch (err) {
       setIsLoading(false);
-      setError(err instanceof Error ? err.message : 'An unexpected error occurred');
+      setError(
+        err instanceof Error ? err.message : 'An unexpected error occurred'
+      );
     }
   };
 
@@ -44,7 +48,7 @@ export const RestaurantsContextProvider = ({
       value={{
         restaurants,
         isLoading,
-        error
+        error,
       }}
     >
       {children}
