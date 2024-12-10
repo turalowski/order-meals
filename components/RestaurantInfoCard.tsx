@@ -73,8 +73,7 @@ export default function RestaurantInfo({
   rating,
   isClosedTemporary,
 }: RestaurantInfoProps) {
-  const ratingArray = Array.from(new Array(Math.ceil(rating)));
-
+  const ratingArray = Array.from(new Array(Math.ceil(rating | 0)));
   return (
     <Container elevation={5}>
       <Cover source={{ uri: photos[0] }} />

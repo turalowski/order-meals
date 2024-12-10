@@ -1,10 +1,9 @@
 import React, { useContext } from 'react';
 import { Platform, StatusBar, FlatList } from 'react-native';
-import { ActivityIndicator, Searchbar } from 'react-native-paper';
+import { ActivityIndicator } from 'react-native-paper';
 import RestaurantInfoCard from '@/components/RestaurantInfoCard';
 import styled from 'styled-components/native';
 import { Restaurant } from '@/utils/restaurants';
-import { useSearchQuery } from '@/hooks/useSearchQuery';
 import {
   useFonts,
   Oswald_400Regular,
@@ -13,6 +12,7 @@ import {
 import { Lato_400Regular, Lato_700Bold } from '@expo-google-fonts/lato';
 import { RestaurantsContext } from './context';
 import { colors } from '@/theme/colors';
+import { Search } from '@/components/search';
 
 const isAndroid = Platform.OS === 'android';
 
@@ -22,14 +22,7 @@ const Container = styled.View`
   background-color: ${props => props.theme.colors.bg.primary};
 `;
 
-const SearchContainer = styled.View`
-  padding: ${props => props.theme.space[3]};
-  background-color: ${props => props.theme.colors.bg.secondary};
-`;
 
-const StyledSearchBar = styled(Searchbar)`
-  background-color: ${props => props.theme.colors.bg.primary};
-`;
 
 const LoadingContainer = styled.View`
   position: absolute;
@@ -50,7 +43,6 @@ const RestaurantList = styled(FlatList<Restaurant>).attrs({
 })``;
 
 export default function Restaurants() {
-  const { searchQuery, setSearchQuery } = useSearchQuery();
   const restaurantContext = useContext(RestaurantsContext);
   const { isLoading, restaurants } = restaurantContext;
   const [fontsLoaded] = useFonts({
@@ -66,13 +58,7 @@ export default function Restaurants() {
 
   return (
     <Container>
-      <SearchContainer>
-        <StyledSearchBar
-          placeholder="Search"
-          onChangeText={setSearchQuery}
-          value={searchQuery}
-        />
-      </SearchContainer>
+      <Search />
       {isLoading && (
         <LoadingContainer>
           <StyledActivityIndicator size={50} animating={true} color={colors.ui.primary} />
