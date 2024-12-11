@@ -5,6 +5,8 @@ import { SvgXml } from 'react-native-svg';
 import star from '../../assets/star';
 import open from '../../assets/open';
 import { Spacing } from '../common/Spacer';
+import { useRouter } from 'expo-router';
+import { TouchableOpacity } from 'react-native';
 
 interface RestaurantInfoProps {
   name: string;
@@ -73,40 +75,44 @@ export default function RestaurantInfo({
   rating,
   isClosedTemporary,
 }: RestaurantInfoProps) {
+  const router = useRouter();
   const ratingArray = Array.from(new Array(Math.ceil(rating | 0)));
+  
   return (
-    <Container elevation={5}>
-      <Cover source={{ uri: photos[0] }} />
-      <Content>
-        <Spacing position="bottom" size={'medium'}>
-          <Title variant="titleLarge">{name}</Title>
-        </Spacing>
-        <Spacing position="bottom" size={'medium'}>
-          <Row>
-            <Stars>
-              {ratingArray.map((_, index) => (
-                <SvgXml key={index} xml={star} width={20} height={20} />
-              ))}
-            </Stars>
-            {isClosedTemporary ? (
-              <TemporaryClosed variant="bodyMedium">
-                Temporarily Closed
-              </TemporaryClosed>
-            ) : (
-              <SvgXml xml={open} width={20} height={20} />
-            )}
-          </Row>
-        </Spacing>
-        <InfoText variant="bodyMedium">
-          <Label>Rating:</Label> {rating}
-        </InfoText>
-        <InfoText variant="bodyMedium">
-          <Label>Status:</Label> {isOpenNow ? 'Open' : 'Closed'}
-        </InfoText>
-        <InfoText variant="bodyMedium">
-          <Label>Address:</Label> {address}
-        </InfoText>
-      </Content>
-    </Container>
+    <TouchableOpacity onPress={() => router.push(`/restaurants/${name}`)}>
+      <Container elevation={5}>
+        <Cover source={{ uri: photos[0] }} />
+        <Content>
+          <Spacing position="bottom" size={'medium'}>
+            <Title variant="titleLarge">{name}</Title>
+          </Spacing>
+          <Spacing position="bottom" size={'medium'}>
+            <Row>
+              <Stars>
+                {ratingArray.map((_, index) => (
+                  <SvgXml key={index} xml={star} width={20} height={20} />
+                ))}
+              </Stars>
+              {isClosedTemporary ? (
+                <TemporaryClosed variant="bodyMedium">
+                  Temporarily Closed
+                </TemporaryClosed>
+              ) : (
+                <SvgXml xml={open} width={20} height={20} />
+              )}
+            </Row>
+          </Spacing>
+          <InfoText variant="bodyMedium">
+            <Label>Rating:</Label> {rating}
+          </InfoText>
+          <InfoText variant="bodyMedium">
+            <Label>Status:</Label> {isOpenNow ? 'Open' : 'Closed'}
+          </InfoText>
+          <InfoText variant="bodyMedium">
+            <Label>Address:</Label> {address}
+          </InfoText>
+        </Content>
+      </Container>
+    </TouchableOpacity>
   );
 }

@@ -7,6 +7,12 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
+          href: null, // This hides the tab
+        }}
+      />
+      <Tabs.Screen
+        name="restaurants"
+        options={{
           title: 'Restaurants',
           tabBarIcon: ({ color }) => (
             <FontAwesome size={20} name="cutlery" color={color} />
