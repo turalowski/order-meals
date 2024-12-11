@@ -9,7 +9,7 @@ import {
 import { Lato_400Regular, Lato_700Bold } from '@expo-google-fonts/lato';
 import { RestaurantsContextProvider } from '../../features/restaurants/context/RestaurantContext';
 import Restaurants from '@/features/restaurants';
-import { LocationContextProvider } from '@/features/restaurants/location.context';
+import { LocationContextProvider } from '@/features/restaurants/context/LocationContext';
 
 export default function Index() {
   const [fontsLoaded] = useFonts({

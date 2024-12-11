@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { locationRequest, locationTransform } from './locations';
+import { locationRequest, locationTransform } from '../api/locationsApi';
 
 interface LocationContextType {
   isLoading: boolean;
