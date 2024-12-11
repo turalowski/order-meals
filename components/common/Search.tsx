@@ -1,7 +1,7 @@
-import { LocationContext } from "@/features/restaurants/context/LocationContext";
-import { useContext,  useState } from "react";
-import { Searchbar } from "react-native-paper";
-import styled from "styled-components/native";
+import { LocationContext } from '@/features/restaurants/context/LocationContext';
+import { useContext, useState } from 'react';
+import { Searchbar } from 'react-native-paper';
+import styled from 'styled-components/native';
 
 const SearchContainer = styled.View`
   padding: ${props => props.theme.space[3]};
@@ -14,7 +14,7 @@ const StyledSearchBar = styled(Searchbar)`
 
 export const Search = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const { search} = useContext(LocationContext);
+  const { search } = useContext(LocationContext);
 
   return (
     <SearchContainer>
@@ -28,4 +28,4 @@ export const Search = () => {
       />
     </SearchContainer>
   );
-}
+};

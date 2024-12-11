@@ -1,21 +1,16 @@
-import React from 'react';
+import { MapComponent } from '@/components/restaurant/Map';
+import { LocationContext } from '@/features/restaurants/context/LocationContext';
+import React, { useContext } from 'react';
 import styled from 'styled-components/native';
 
 const Container = styled.View`
   flex: 1;
-  justify-content: center;
-  align-items: center;
 `;
 
-const Title = styled.Text`
-  font-size: 24px;
-  font-weight: bold;
-`;
-
-export default function Settings() {
+export default function MapScreen() {
   return (
-    <Container>
-      <Title>Map</Title>
-    </Container>
+      <Container>
+        <MapComponent />
+      </Container>
   );
 }

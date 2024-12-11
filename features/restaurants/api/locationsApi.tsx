@@ -10,7 +10,18 @@ type LocationResult = {
   results: [{
     geometry: {
       location: Coordinates
+      viewport: {
+        northeast: {
+          lat: number,
+          lng: number
+        },
+        southwest: {
+          lat: number,
+          lng: number;
+        }
+      }
     }
+    
   }]
 }
 
@@ -28,6 +39,16 @@ export const locationRequest = (searchTerm: string): Promise<LocationResult> => 
             location: {
               lat: locationMock.results[0].geometry.location.lat,
               lng: locationMock.results[0].geometry.location.lng
+            },
+            viewport: {
+              northeast: {
+                lat: locationMock.results[0].geometry.viewport.northeast.lat,
+                lng: locationMock.results[0].geometry.viewport.northeast.lng
+              },
+              southwest: {
+                lat: locationMock.results[0].geometry.viewport.southwest.lat,
+                lng: locationMock.results[0].geometry.viewport.southwest.lng
+              }
             }
           }
         }]
@@ -38,8 +59,8 @@ export const locationRequest = (searchTerm: string): Promise<LocationResult> => 
   
   export const locationTransform = (result: LocationResult) => {
     const formattedResponse = camelize(result);
-    const { geometry = { location: { lat: 0, lng: 0 } } } = formattedResponse.results[0];
+    const { geometry = { location: { lat: 0, lng: 0 }, viewport: {} } } = formattedResponse.results[0];
     const { lat, lng } = geometry.location;
-  
-    return { lat, lng };
+    console.log('geometry', geometry)
+    return { lat, lng, viewport: geometry.viewport };
   };

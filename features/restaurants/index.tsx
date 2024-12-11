@@ -66,7 +66,7 @@ export default function Restaurants() {
       )}
       <RestaurantList
         data={restaurants}
-        renderItem={({ item }) => <RestaurantInfoCard {...item} />}
+        renderItem={({ item }) => <RestaurantInfoCard item={item} />}
         keyExtractor={(item, index) => `${item.name}-${index}`}
       />
     </Container>

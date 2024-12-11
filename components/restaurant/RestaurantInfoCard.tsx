@@ -5,17 +5,19 @@ import { SvgXml } from 'react-native-svg';
 import star from '../../assets/star';
 import open from '../../assets/open';
 import { Spacing } from '../common/Spacer';
-import { useRouter } from 'expo-router';
+import {  useRouter } from 'expo-router';
 import { TouchableOpacity } from 'react-native';
 
 interface RestaurantInfoProps {
-  name: string;
-  icon: string;
-  photos: string[];
-  address: string;
-  isOpenNow: boolean;
-  rating: number;
-  isClosedTemporary: boolean;
+  item: {
+    name: string;
+    icon: string;
+    photos: string[];
+    address: string;
+    isOpenNow: boolean;
+    rating: number;
+    isClosedTemporary: boolean;
+  }
 }
 
 const Container = styled(Card)`
@@ -66,20 +68,20 @@ const TemporaryClosed = styled(Text)`
   margin-top: ${props => props.theme.space[2]};
 `;
 
-export default function RestaurantInfo({
-  name,
-  icon,
-  photos,
-  address,
-  isOpenNow,
-  rating,
-  isClosedTemporary,
-}: RestaurantInfoProps) {
+export default function RestaurantInfo({ item }: RestaurantInfoProps) {
+  const { name, icon, photos, address, isOpenNow, rating, isClosedTemporary } =
+    item;
   const router = useRouter();
+
   const ratingArray = Array.from(new Array(Math.ceil(rating | 0)));
-  
   return (
-    <TouchableOpacity onPress={() => router.push(`/restaurants/${name}`)}>
+    <TouchableOpacity onPress={() => router.push({
+      pathname: `/restaurants/[id]`,
+      params: {
+        id: name,
+        
+      }
+    })}>
       <Container elevation={5}>
         <Cover source={{ uri: photos[0] }} />
         <Content>

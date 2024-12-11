@@ -31,7 +31,6 @@ export const RestaurantsContextProvider = ({
       setIsLoading(true);
       setTimeout(async () => {
         const result: any = await restaurantsRequest(location);
-        console.log('results', result)
         setRestaurants(restaurantsTransform(result));
         setIsLoading(false);
       }, 4000);

@@ -7,9 +7,7 @@ import {
   Oswald_700Bold,
 } from '@expo-google-fonts/oswald';
 import { Lato_400Regular, Lato_700Bold } from '@expo-google-fonts/lato';
-import { RestaurantsContextProvider } from '../../../features/restaurants/context/RestaurantContext';
 import Restaurants from '@/features/restaurants';
-import { LocationContextProvider } from '@/features/restaurants/context/LocationContext';
 
 export default function Index() {
   const [fontsLoaded] = useFonts({
@@ -24,12 +22,6 @@ export default function Index() {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <LocationContextProvider>
-        <RestaurantsContextProvider>
-          <Restaurants />
-        </RestaurantsContextProvider>
-      </LocationContextProvider>
-    </ThemeProvider>
+      <Restaurants />
   );
 }

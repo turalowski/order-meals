@@ -31,7 +31,6 @@ export const LocationContextProvider = ({
   const [error, setError] = useState<string | null>(null);
 
   const onSearch = (searchKeyword = 'Antwerp') => {
-    console.log(searchKeyword);
     setIsLoading(true);
     setKeyword(searchKeyword);
     if (!searchKeyword.length) {
@@ -42,7 +41,6 @@ export const LocationContextProvider = ({
       .then(result => {
         setIsLoading(false);
         setLocation(result);
-        console.log(result);
       })
       .catch(err => {
         setIsLoading(false);
