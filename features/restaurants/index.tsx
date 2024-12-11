@@ -3,7 +3,6 @@ import { Platform, StatusBar, FlatList } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
 import RestaurantInfoCard from '@/components/restaurant/RestaurantInfoCard';
 import styled from 'styled-components/native';
-import { Restaurant } from '@/utils/restaurants';
 import {
   useFonts,
   Oswald_400Regular,
@@ -13,6 +12,8 @@ import { Lato_400Regular, Lato_700Bold } from '@expo-google-fonts/lato';
 import { RestaurantsContext } from './context/RestaurantContext';
 import { colors } from '@/theme/colors';
 import { Search } from '@/components/common/Search';
+import {TransformedRestaurant} from '@/utils/type';
+
 
 const isAndroid = Platform.OS === 'android';
 
@@ -35,7 +36,7 @@ const StyledActivityIndicator = styled(ActivityIndicator)`
 margin-left: -25px;
 `;
 
-const RestaurantList = styled(FlatList<Restaurant>).attrs({
+const RestaurantList = styled(FlatList<TransformedRestaurant>).attrs({
   contentContainerStyle: {
     padding: 16,
     gap: 24,

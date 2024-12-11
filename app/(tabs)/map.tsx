@@ -1,6 +1,5 @@
 import { MapComponent } from '@/components/restaurant/Map';
-import { LocationContext } from '@/features/restaurants/context/LocationContext';
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 
 const Container = styled.View`

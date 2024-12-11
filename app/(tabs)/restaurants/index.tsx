@@ -1,6 +1,4 @@
 import React from 'react';
-import { ThemeProvider } from 'styled-components/native';
-import { theme } from '@/theme';
 import {
   useFonts,
   Oswald_400Regular,

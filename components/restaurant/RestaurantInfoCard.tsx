@@ -7,17 +7,10 @@ import open from '../../assets/open';
 import { Spacing } from '../common/Spacer';
 import {  useRouter } from 'expo-router';
 import { TouchableOpacity } from 'react-native';
+import { TransformedRestaurant } from '@/utils/type';
 
 interface RestaurantInfoProps {
-  item: {
-    name: string;
-    icon: string;
-    photos: string[];
-    address: string;
-    isOpenNow: boolean;
-    rating: number;
-    isClosedTemporary: boolean;
-  }
+  item: TransformedRestaurant
 }
 
 const Container = styled(Card)`
@@ -69,17 +62,17 @@ const TemporaryClosed = styled(Text)`
 `;
 
 export default function RestaurantInfo({ item }: RestaurantInfoProps) {
-  const { name, icon, photos, address, isOpenNow, rating, isClosedTemporary } =
+  const { name, photos, address, isOpenNow, rating, isClosedTemporarily } =
     item;
   const router = useRouter();
 
-  const ratingArray = Array.from(new Array(Math.ceil(rating | 0)));
+  const ratingArray = Array.from(new Array(Math.ceil(rating || 0)));
   return (
     <TouchableOpacity onPress={() => router.push({
       pathname: `/restaurants/[id]`,
       params: {
         id: name,
-        
+
       }
     })}>
       <Container elevation={5}>
@@ -95,7 +88,7 @@ export default function RestaurantInfo({ item }: RestaurantInfoProps) {
                   <SvgXml key={index} xml={star} width={20} height={20} />
                 ))}
               </Stars>
-              {isClosedTemporary ? (
+              {isClosedTemporarily ? (
                 <TemporaryClosed variant="bodyMedium">
                   Temporarily Closed
                 </TemporaryClosed>

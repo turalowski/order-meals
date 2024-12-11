@@ -1,10 +1,10 @@
 import React, { useState, createContext, useEffect, useContext } from 'react';
-
 import { restaurantsRequest, restaurantsTransform } from '../api/restaurantsApi';
 import { LocationContext } from './LocationContext';
+import { RestaurantsResponse, TransformedRestaurant } from '@/utils/type'
 
 interface RestaurantsContextType {
-  restaurants: any[];
+  restaurants: TransformedRestaurant[];
   isLoading: boolean;
   error: string | null;
 }
@@ -20,17 +20,16 @@ export const RestaurantsContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [restaurants, setRestaurants] = useState<any[]>([]);
+  const [restaurants, setRestaurants] = useState<TransformedRestaurant[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const { location } = useContext(LocationContext);
 
   const retrieveRestaurants = async (location: string) => {
-
     try {
       setIsLoading(true);
       setTimeout(async () => {
-        const result: any = await restaurantsRequest(location);
+        const result: RestaurantsResponse = await restaurantsRequest(location);
         setRestaurants(restaurantsTransform(result));
         setIsLoading(false);
       }, 4000);
@@ -45,7 +44,7 @@ export const RestaurantsContextProvider = ({
   useEffect(() => {
     if(location) {
       const locationString = `${location?.lat},${location?.lng}`
-    retrieveRestaurants(locationString);
+      retrieveRestaurants(locationString);
     }
   }, [location]);
 

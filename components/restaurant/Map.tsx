@@ -1,11 +1,11 @@
 import { LocationContext } from '@/features/restaurants/context/LocationContext';
 import { useContext, useEffect, useState } from 'react';
-import MapView from 'react-native-maps';
+import MapView, { Marker, Callout } from 'react-native-maps';
 import styled from 'styled-components/native';
-import { Searchbar } from 'react-native-paper';
-import { View } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import { RestaurantsContext } from '@/features/restaurants/context/RestaurantContext';
 import { Search } from '../common/Search';
+import { router } from 'expo-router';
 
 const Map = styled(MapView)`
   width: 100%;
@@ -19,13 +19,34 @@ const SearchContainer = styled(View)`
   padding: 16px;
 `;
 
+const CalloutContainer = styled(View)`
+  padding: 8px;
+  max-width: 160px;
+`;
+
+const CalloutText = styled(Text)`
+  font-size: 14px;
+  font-weight: bold;
+`;
+
+const CalloutAddress = styled(Text)`
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+`;
+
+const CalloutImage = styled(Image)`
+  width: 120px;
+  height: 100px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+`;
+
 export const MapComponent = () => {
   const { location } = useContext(LocationContext);
   const { restaurants } = useContext(RestaurantsContext);
-  const [searchQuery, setSearchQuery] = useState('');
   const [latDelta, setLatDelta] = useState(0);
 
-  console.log(location);
   const { lat, lng, viewport } = location;
 
   useEffect(() => {
@@ -55,9 +76,23 @@ export const MapComponent = () => {
           longitudeDelta: 0.0421,
         }}
       >
-        {restaurants.map(restaurant => {
-          return null;
-        })}
+        {restaurants.map(restaurant => (
+          <Marker
+            key={restaurant.name}
+            coordinate={{
+              latitude: restaurant.geometry.location.lat,
+              longitude: restaurant.geometry.location.lng,
+            }}
+          >
+            <Callout onPress={() => router.push(`/restaurants/${restaurant.name}`)}>
+              <CalloutContainer>
+                <CalloutImage source={{ uri: restaurant.photos[0] }} />
+                <CalloutText>{restaurant.name}</CalloutText>
+                <CalloutAddress>{restaurant.vicinity}</CalloutAddress>
+              </CalloutContainer>
+            </Callout>
+          </Marker>
+        ))}
       </Map>
     </>
   );

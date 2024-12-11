@@ -1,5 +1,4 @@
 import { RestaurantDetails } from '@/components/restaurant/RestaurantDetails';
-import { theme } from '@/theme';
 import { useLocalSearchParams } from 'expo-router';
 import React from 'react';
 

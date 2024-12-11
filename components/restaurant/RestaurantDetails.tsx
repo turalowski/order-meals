@@ -1,6 +1,5 @@
 import {
   findRestaurantByTitle,
-  RestaurantType,
 } from '@/features/restaurants/api/restaurantsApi';
 import { LocationContext } from '@/features/restaurants/context/LocationContext';
 import { useContext, useEffect, useState } from 'react';
@@ -8,7 +7,7 @@ import styled from 'styled-components/native';
 import { SvgXml } from 'react-native-svg';
 import { List, Text } from 'react-native-paper';
 import star from '@/assets/star';
-import { Spacing } from '../common/Spacer';
+import { TransformedRestaurant } from '@/utils/type'
 
 const Container = styled.View`
   flex: 1;
@@ -29,26 +28,14 @@ const Title = styled(Text)`
   margin-top: ${props => props.theme.space[3]};
 `;
 
-const InfoText = styled(Text)`
-  font-size: ${props => props.theme.fontSizes.body};
-  font-family: ${props => props.theme.fonts.body};
-  color: ${props => props.theme.colors.text.primary};
-`;
-
-const Label = styled(Text)`
-  font-weight: ${props => props.theme.fontWeights.bold};
-  color: ${props => props.theme.colors.ui.primary};
-`;
-
 const Stars = styled.View`
   flex-direction: row;
-  margin-vertical: ${props => props.theme.space[2]};
 `;
 
 export const RestaurantDetails = ({ id }: { id: string }) => {
 
   const { location } = useContext(LocationContext);
-  const [restaurant, setRestaurant] = useState<RestaurantType | null>(null);
+  const [restaurant, setRestaurant] = useState<TransformedRestaurant | null>(null);
 
   useEffect(() => {
     if(id && location) {
