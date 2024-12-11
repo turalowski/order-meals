@@ -2,7 +2,11 @@ import { Stack } from 'expo-router';
 
 export default function RestaurantLayout() {
   return (
-    <Stack>
+    <Stack
+      screenOptions={{
+        presentation: 'modal'
+      }}
+    >
       <Stack.Screen
         name="index"
         options={{
