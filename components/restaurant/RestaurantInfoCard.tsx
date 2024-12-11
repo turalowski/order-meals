@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { Card, Text } from 'react-native-paper';
 import { SvgXml } from 'react-native-svg';
-import star from '../assets/star';
-import open from '../assets/open';
-import { Spacing } from './Spacer';
+import star from '../../assets/star';
+import open from '../../assets/open';
+import { Spacing } from '../common/Spacer';
 
 interface RestaurantInfoProps {
   name: string;

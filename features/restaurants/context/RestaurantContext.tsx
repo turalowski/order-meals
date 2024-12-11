@@ -1,7 +1,7 @@
 import React, { useState, createContext, useEffect, useContext } from 'react';
 
-import { restaurantsRequest, restaurantsTransform } from './api';
-import { LocationContext } from './location.context';
+import { restaurantsRequest, restaurantsTransform } from '../api/restaurantsApi';
+import { LocationContext } from './LocationContext';
 
 interface RestaurantsContextType {
   restaurants: any[];

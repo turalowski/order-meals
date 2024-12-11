@@ -7,7 +7,7 @@ import {
   Oswald_700Bold,
 } from '@expo-google-fonts/oswald';
 import { Lato_400Regular, Lato_700Bold } from '@expo-google-fonts/lato';
-import { RestaurantsContextProvider } from '../../features/restaurants/context';
+import { RestaurantsContextProvider } from '../../features/restaurants/context/RestaurantContext';
 import Restaurants from '@/features/restaurants';
 import { LocationContextProvider } from '@/features/restaurants/location.context';
 

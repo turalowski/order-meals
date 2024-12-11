@@ -1,4 +1,4 @@
-import { mockImages, mocks } from './mock';
+import { mockImages, mocks } from '../mock';
 
 export const restaurantsRequest = (location = '37.7749295,-122.4194155') => {
   return new Promise((resolve, reject) => {
@@ -16,6 +16,7 @@ interface Restaurant {
   };
   business_status?: string;
   photos: string[];
+  vicinity: string;
 }
 
 interface TransformResults {
@@ -32,6 +33,7 @@ export const restaurantsTransform = ({ results = [] }: TransformResults) => {
       ...restaurant,
       isOpenNow: restaurant.opening_hours && restaurant.opening_hours.open_now,
       isClosedTemporarily: restaurant.business_status === 'CLOSED_TEMPORARILY',
+      address: restaurant.vicinity
     };
   });
 

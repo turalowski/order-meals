@@ -1,4 +1,4 @@
-import {locations} from './mock/locations.mock'
+import {locations} from '../mock/locations.mock'
 import camelize from 'camelize';
 
 type Coordinates = {

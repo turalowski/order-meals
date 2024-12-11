@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Platform, StatusBar, FlatList } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
-import RestaurantInfoCard from '@/components/RestaurantInfoCard';
+import RestaurantInfoCard from '@/components/restaurant/RestaurantInfoCard';
 import styled from 'styled-components/native';
 import { Restaurant } from '@/utils/restaurants';
 import {
@@ -10,9 +10,9 @@ import {
   Oswald_700Bold,
 } from '@expo-google-fonts/oswald';
 import { Lato_400Regular, Lato_700Bold } from '@expo-google-fonts/lato';
-import { RestaurantsContext } from './context';
+import { RestaurantsContext } from './context/RestaurantContext';
 import { colors } from '@/theme/colors';
-import { Search } from '@/components/search';
+import { Search } from '@/components/common/Search';
 
 const isAndroid = Platform.OS === 'android';
 
