@@ -12,8 +12,8 @@ import { Lato_400Regular, Lato_700Bold } from '@expo-google-fonts/lato';
 import { RestaurantsContext } from './context/RestaurantContext';
 import { colors } from '@/theme/colors';
 import { Search } from '@/components/common/Search';
-import {TransformedRestaurant} from '@/utils/type';
-
+import { TransformedRestaurant } from '@/utils/type';
+import { useFavourites } from './context/FavouritesContext';
 
 const isAndroid = Platform.OS === 'android';
 
@@ -23,17 +23,15 @@ const Container = styled.View`
   background-color: ${props => props.theme.colors.bg.primary};
 `;
 
-
-
 const LoadingContainer = styled.View`
   position: absolute;
   top: 50%;
   left: 50%;
-  z-index: 1; 
+  z-index: 1;
 `;
 
 const StyledActivityIndicator = styled(ActivityIndicator)`
-margin-left: -25px;
+  margin-left: -25px;
 `;
 
 const RestaurantList = styled(FlatList<TransformedRestaurant>).attrs({
@@ -44,8 +42,9 @@ const RestaurantList = styled(FlatList<TransformedRestaurant>).attrs({
 })``;
 
 export default function Restaurants() {
-  const restaurantContext = useContext(RestaurantsContext);
-  const { isLoading, restaurants } = restaurantContext;
+  const { isLoading, restaurants }  = useContext(RestaurantsContext);
+  const { favourites } = useFavourites();
+
   const [fontsLoaded] = useFonts({
     Oswald_400Regular,
     Oswald_700Bold,
@@ -62,7 +61,11 @@ export default function Restaurants() {
       <Search />
       {isLoading && (
         <LoadingContainer>
-          <StyledActivityIndicator size={50} animating={true} color={colors.ui.primary} />
+          <StyledActivityIndicator
+            size={50}
+            animating={true}
+            color={colors.ui.primary}
+          />
         </LoadingContainer>
       )}
       <RestaurantList

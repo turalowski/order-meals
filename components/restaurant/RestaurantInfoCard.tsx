@@ -5,12 +5,13 @@ import { SvgXml } from 'react-native-svg';
 import star from '../../assets/star';
 import open from '../../assets/open';
 import { Spacing } from '../common/Spacer';
-import {  useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { TouchableOpacity } from 'react-native';
 import { TransformedRestaurant } from '@/utils/type';
+import { Favourite } from '../favourite';
 
 interface RestaurantInfoProps {
-  item: TransformedRestaurant
+  item: TransformedRestaurant;
 }
 
 const Container = styled(Card)`
@@ -61,21 +62,41 @@ const TemporaryClosed = styled(Text)`
   margin-top: ${props => props.theme.space[2]};
 `;
 
+const FavouriteWrapper = styled.View`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 9;
+`;
+
 export default function RestaurantInfo({ item }: RestaurantInfoProps) {
-  const { name, photos, address, isOpenNow, rating, isClosedTemporarily, place_id } =
-    item;
+  const {
+    name,
+    photos,
+    address,
+    isOpenNow,
+    rating,
+    isClosedTemporarily,
+    place_id,
+  } = item;
   const router = useRouter();
 
   const ratingArray = Array.from(new Array(Math.ceil(rating || 0)));
   return (
-    <TouchableOpacity onPress={() => router.push({
-      pathname: `/restaurants/[id]`,
-      params: {
-        id: place_id,
-
+    <TouchableOpacity
+      onPress={() =>
+        router.push({
+          pathname: `/restaurants/[id]`,
+          params: {
+            id: place_id,
+          },
+        })
       }
-    })}>
+    >
       <Container elevation={5}>
+        <FavouriteWrapper>
+          <Favourite restaurant={item} />
+        </FavouriteWrapper>
         <Cover source={{ uri: photos[0] }} />
         <Content>
           <Spacing position="bottom" size={'medium'}>
