@@ -54,7 +54,7 @@ export const RestaurantDetails = ({ id }: { id: string }) => {
   }, [location, id]);
 
   if(!id) {
-    return <Title>{id} is not a valid restaurant name</Title>
+    return <Title>{id} is not a valid restaurant id</Title>
 }
 
   if (!restaurant) {

@@ -62,7 +62,7 @@ const TemporaryClosed = styled(Text)`
 `;
 
 export default function RestaurantInfo({ item }: RestaurantInfoProps) {
-  const { name, photos, address, isOpenNow, rating, isClosedTemporarily } =
+  const { name, photos, address, isOpenNow, rating, isClosedTemporarily, place_id } =
     item;
   const router = useRouter();
 
@@ -71,7 +71,7 @@ export default function RestaurantInfo({ item }: RestaurantInfoProps) {
     <TouchableOpacity onPress={() => router.push({
       pathname: `/restaurants/[id]`,
       params: {
-        id: name,
+        id: place_id,
 
       }
     })}>

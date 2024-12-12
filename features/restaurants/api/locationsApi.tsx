@@ -56,6 +56,5 @@ export const locationTransform = (result: LocationResult): TransformedLocation =
     }
   }} = formattedResponse.results[0];
   const { lat, lng } = geometry.location;
-  console.log('geometry', geometry)
   return { lat, lng, viewport: geometry.viewport };
 };
